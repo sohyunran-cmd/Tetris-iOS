@@ -1,0 +1,11 @@
+name: Build iOS App
+on: [push]
+jobs:
+  build:
+    runs-on: macos-latest
+    steps:
+    - uses: actions/checkout@v4
+    - name: Build
+      run: xcodebuild build -project Tetris.xcodeproj -scheme Tetris -destination 'generic/platform=iOS'
+    - name: Export IPA
+      run: xcodebuild -exportArchive -archivePath build/Tetris.xcarchive -exportPath build/IPA -exportOptionsPlist ExportOptions.plist
